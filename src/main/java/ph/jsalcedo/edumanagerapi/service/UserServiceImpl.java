@@ -1,9 +1,10 @@
-package ph.cdo.jsalcedo.edumanagerapi.service;
+package ph.jsalcedo.edumanagerapi.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ph.cdo.jsalcedo.edumanagerapi.model.User;
-import ph.cdo.jsalcedo.edumanagerapi.repository.UserRepository;
+import ph.jsalcedo.edumanagerapi.model.User;
+import ph.jsalcedo.edumanagerapi.repository.UserRepository;
+
 
 import java.util.List;
 

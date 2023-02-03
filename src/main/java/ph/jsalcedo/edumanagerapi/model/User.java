@@ -1,9 +1,7 @@
 package ph.jsalcedo.edumanagerapi.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,12 +11,15 @@ import ph.jsalcedo.edumanagerapi.enums.Role;
 import java.util.Collection;
 import java.util.List;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 @ToString
 @Entity
+@Builder
 @Table(name = "user")
-public class AppUser implements UserDetails {
+public class User implements UserDetails {
 
     @Id
     @SequenceGenerator(
@@ -33,40 +34,20 @@ public class AppUser implements UserDetails {
     )
     @Column(name="id")
     private Long id;
-    @Column(nullable = false)
-    private String user;
-    @Column(nullable = false)
-    private String pass;
-    @Column(nullable = false)
+
     private String email;
+
+    private String pass;
+
     @Enumerated(EnumType.STRING)
     private Role role;
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "address_id", referencedColumnName = "id")
-    private Institution institution = new Institution();
+    @JoinColumn(name = "institution_id", referencedColumnName = "id")
+    private Institution institution;
 
-    public AppUser() {
-    }
 
-    public AppUser(String user, String pass, String email) {
-        this.user = user;
-        this.pass = pass;
-        this.email = email;
-//        this.institution = new Institution();
-    }
 
-    public AppUser(Long id, String user, String pass, String email, Institution institution) {
-        this.id = id;
-        this.user = user;
-        this.pass = pass;
-        this.email = email;
-        this.institution = institution;
-    }
 
-    private void setPass(String password){
-        this.pass = BCrypt.hashpw(password, BCrypt.gensalt());
-        System.out.println("Hashed password created from " + password + " to " +  this.pass);
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -80,7 +61,7 @@ public class AppUser implements UserDetails {
 
     @Override
     public String getUsername() {
-        return user;
+        return email;
     }
 
     @Override
@@ -100,6 +81,6 @@ public class AppUser implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 }

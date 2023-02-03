@@ -1,4 +1,4 @@
-package ph.cdo.jsalcedo.edumanagerapi.model;
+package ph.jsalcedo.edumanagerapi.model;
 
 import jakarta.persistence.*;
 
@@ -15,10 +15,10 @@ public class Institution {
 
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "user_sequence"
+            generator = "institution_sequence"
     )
     private Long id;
 
-    @OneToOne(mappedBy = "institution")
+    @OneToOne(mappedBy = "institution", targetEntity = User.class, cascade = CascadeType.ALL)
     private User user;
 }

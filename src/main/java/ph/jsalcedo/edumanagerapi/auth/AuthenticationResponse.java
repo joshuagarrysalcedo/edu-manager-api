@@ -1,4 +1,4 @@
-package ph.jsalcedo.edumanagerapi.controller;
+package ph.jsalcedo.edumanagerapi.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

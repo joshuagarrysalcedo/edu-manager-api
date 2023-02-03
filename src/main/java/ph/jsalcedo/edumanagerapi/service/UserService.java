@@ -1,7 +1,8 @@
-package ph.cdo.jsalcedo.edumanagerapi.service;
+package ph.jsalcedo.edumanagerapi.service;
 
-import org.springframework.stereotype.Service;
-import ph.cdo.jsalcedo.edumanagerapi.model.User;
+
+
+import ph.jsalcedo.edumanagerapi.model.User;
 
 import java.util.List;
 

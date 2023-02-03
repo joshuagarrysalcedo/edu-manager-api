@@ -1,4 +1,4 @@
-package ph.jsalcedo.edumanagerapi.controller;
+package ph.jsalcedo.edumanagerapi.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,5 +11,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AuthenticationRequest {
     private String email;
-    private String password;
+    String password;
 }

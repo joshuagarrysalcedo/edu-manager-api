@@ -1,4 +1,4 @@
-package ph.jsalcedo.edumanagerapi.controller;
+package ph.jsalcedo.edumanagerapi.auth;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,7 +21,7 @@ public class AuthenticationService {
     public AuthenticationResponse register(RegisterRequest request) {
         var user = User.builder()
                 .email(request.getEmail())
-                .email(passwordEncoder.encode(request.getPassword()))
+                .pass(passwordEncoder.encode(request.getPassword()))
                 .role(Role.USER)
                 .institution(new Institution())
                 .build();
@@ -31,12 +31,16 @@ public class AuthenticationService {
     }
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
+        System.out.println();
         authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword())
+                new UsernamePasswordAuthenticationToken
+                        (request.getEmail(), request.getPassword())
         );
         var user = userRepository.findByEmail(request.getEmail())
                 .orElseThrow();
         var jwtToken = jwtService.generateToken(user);
+
+     //   System.out.println(jwtToken);
         return AuthenticationResponse.builder().token(jwtToken).build();
     }
 }
